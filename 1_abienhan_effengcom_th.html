@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ability Enhancement</title>
+    <link rel="stylesheet" href="course_style.css">
+    <script>
+        const initialSeats = 70;
+
+        function registerSeat() {
+    let selectedRadio = document.querySelector('input[name="effeng"]:checked');
+    if (!selectedRadio) {
+        alert("Please select a seat before registering.");
+        return;
+    }
+
+    let row = selectedRadio.closest('tr');
+    let courseIndex = selectedRadio.value;
+    let seatsKey = `effeng_seats_${courseIndex}`;
+
+    // Load registered courses
+    let registeredCourses = JSON.parse(localStorage.getItem("registeredCourses")) || [];
+
+    // Check if already registered this course
+    let alreadyRegistered = registeredCourses.some(course => course.index === courseIndex);
+    if (alreadyRegistered) {
+        alert("You have already registered for this course. Please delete it from View/Modify if you want to register again.");
+        return;
+    }
+
+    let seatsRemaining = parseInt(localStorage.getItem(seatsKey)) || initialSeats;
+
+    if (seatsRemaining <= 0) {
+        alert("No seats remaining for this course.");
+        return;
+    }
+
+    // Register the course
+    seatsRemaining--;
+    localStorage.setItem(seatsKey, seatsRemaining);
+
+    let courseData = {
+        index: courseIndex,
+        course: row.cells[1].innerHTML,
+        faculty: row.cells[2].innerText,
+        room: row.cells[3].innerText,
+        slot: row.cells[4].innerText
+    };
+
+    registeredCourses.push(courseData);
+    localStorage.setItem("registeredCourses", JSON.stringify(registeredCourses));
+
+    alert("Course registered successfully! Seats remaining: " + seatsRemaining);
+    loadSeats();
+}
+
+
+        function loadSeats() {
+            let rows = document.querySelectorAll('table tr[data-index]');
+            rows.forEach(row => {
+                let index = row.getAttribute('data-index');
+                let seatsKey = `effeng_seats_${index}`;
+                let seatsRemaining = parseInt(localStorage.getItem(seatsKey));
+
+                if (seatsRemaining === null) {
+                    localStorage.setItem(seatsKey, initialSeats);
+                    seatsRemaining = initialSeats;
+                }
+
+                row.querySelector('.seats').innerText = seatsRemaining;
+            });
+        }
+
+        window.onload = loadSeats;
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <button class="view-modify-btn" onclick="window.location.href='view.html'">View/Modify</button>
+    </div>
+    
+    <h2>Ability Enhancement</h2>
+    <table>
+        <tr id="ftr">
+            <th>S.No</th>
+            <th>Course</th>
+            <th>Faculty Name</th>
+            <th>Room No</th>
+            <th>Slot</th>
+            <th>Select</th>
+        </tr>
+        <tr data-index="1">
+            <td>1</td>
+            <td>UENG101L - Effective English Communication (Theory Only)</td>
+            <td>Meera B</td>
+            <td>SJT-104</td>
+            <td>D1</td>
+            
+            <td><input type="radio" name="effeng" value="1">70</td>
+        </tr>
+        <tr data-index="2">
+            <td>2</td>
+            <td>UENG101L - Effective English Communication (Theory Only)</td>
+            <td>Meera B</td>
+            <td>SJT-109</td>
+            <td>D2</td>
+            
+            <td><input type="radio" name="effeng" value="2">70</td>
+        </tr>
+        <tr data-index="3">
+            <td>3</td>
+            <td>UENG101L - Effective English Communication (Theory Only)</td>
+            <td>Sumaya</td>
+            <td>SJT-304</td>
+            <td>D1</td>
+            
+            <td><input type="radio" name="effeng" value="3">70</td>
+        </tr>
+        <tr data-index="4">
+            <td>4</td>
+            <td>UENG101L - Effective English Communication (Theory Only)</td>
+            <td>Sumaya</td>
+            <td>SJT-211</td>
+            <td>D2</td>
+            
+            <td><input type="radio" name="effeng" value="4">70</td>
+        </tr>
+    </table>
+    <br><br>
+    <center>
+        <button class="register-btn" onclick="registerSeat()">Register</button>
+    </center>
+    <center>
+        <button onclick="window.history.back()" class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill="#BB271A">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M7 8V5l-7 7 7 7v-3l-4-4 4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/>
+            </svg>
+            Back
+        </button>
+    </center>
+</body>
+</html>

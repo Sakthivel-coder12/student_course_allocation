@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ability Enhancement</title>
+    <link rel="stylesheet" href="new_style.css">
+    <script>
+        var ho = document.getElementsByClassName("back-btn");
+        function go_to_home()
+        {
+            window.location.href = "register_sem2.html";
+        }
+        function go_to_home1()
+        {
+            window.location.href = "home_2.html"
+        }
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <button onclick="go_to_home1()" class="home-btn">Home</button>
+        <button onclick = "window.location.href ='view.html'" class="view-modify-btn">View/Modify</button>
+    </div><h2>Course Registration - Ability Enhancement</h2>
+<table>
+    <tr style="background-color: rgb(239, 242, 242);">
+        <th>S.No</th>
+        <th>Course Code</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Credit</th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>UENG102L</td>
+        <td>Technical English Communication</td>
+        <td>TH</td>
+        <td>2.0</td>
+        <td><button class="register-btn" onclick="window.location.href ='2_abienhan_techengcom_th.html'">Register</button></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>UENG102P</td>
+        <td>Technical English Communication Lab</td>
+        <td>LO</td>
+        <td>1.0</td>
+        <td><button class="register-btn" onclick= "window.location.href = '2_abienhan_techengcom_th.html'">Register</button></td>
+    </tr>
+</table>
+<center>
+<button   onclick="go_to_home()"  class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill="#BB271A"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M7 8V5l-7 7 7 7v-3l-4-4 4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>Back</button>
+</center>
+</body>
+</html>

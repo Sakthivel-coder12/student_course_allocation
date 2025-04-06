@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&display=swap');
+
+        body {
+            font-family: 'Cactus Classical Serif', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #aa99e3, #8a58a3, #c795d1, #420450, #bc34da);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #212162;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 350px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+            border: 5px solid transparent;
+            animation: borderAnimation 3s linear infinite;
+        }
+
+        @keyframes borderAnimation {
+            0% { border-image: linear-gradient(0deg, red, transparent) 1; }
+            25% { border-image: linear-gradient(90deg, rgb(123, 2, 252), transparent) 1; }
+            50% { border-image: linear-gradient(180deg, rgb(2, 108, 230), transparent) 1; }
+            75% { border-image: linear-gradient(270deg, rgb(233, 3, 164), transparent) 1; }
+            100% { border-image: linear-gradient(360deg, red, transparent) 1; }
+        }
+
+        input {
+            width: calc(100% - 40px);
+            padding: 10px 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding-left: 40px;
+        }
+        input:focus {
+            border-color: #762887;
+            outline: none;
+        }
+        .input-container {
+            position: relative;
+        }
+        .input-container i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #762887;
+            color: #efecf0;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        button:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+        .switch {
+            margin-top: 50px;
+            cursor: pointer;
+            color: #bc34da;
+            padding: 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .hidden {
+            display: none;
+        }
+        h2 {
+            color: #070508;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="auth-form" method="post">
+            <div id="signup-fields">
+                <h1>Signup Form</h1>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="name" placeholder="Name" name="Name" required>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email ID" name="email" required>
+                    <p  style="color: red;"  id = "emailerr"></p>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="phone" placeholder="Phone Number" name="mobile">
+                    <p  style="color: red;"  id="phoerr"></p>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-id-badge"></i>
+                    <input type="text" id="register-number" placeholder="Register Number" name="regno" required>
+                    <p  style="color: red;"  id="reerr"></p>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="signup-username" placeholder="Username" name="signup_username" required>
+                    <p  style="color: red;"  id="userr"></p>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="signup-password" placeholder="Password" name="signup_password" required>
+                    <p  style="color: red;"  id="passerr"></p>
+                </div>
+                <button type="submit" onclick="validation(event)">Submit</button>
+                <br><br>
+                <button type="reset">Reset</button><br>
+                <b class="switch" onclick="toggleForm()">Already have an account? Sign up</b>
+            </div>
+        </form>
+    </div>
+    <script>
+        function validation(e) {
+            e.preventDefault();
+            var isvalid = true;
+            var pho = document.getElementById("phone").value;
+            var pass = document.getElementById("signup-password").value;
+            var passerr = document.getElementById("passerr");
+            var phoerr = document.getElementById("phoerr");
+            var userr = document.getElementById("userr");
+            var user = document.getElementById("signup-username").value;
+            var email = document.getElementById("email").value;
+            var emailerr = document.getElementById("emailerr");
+            var reg = document.getElementById("register-number").value;
+            var reerr  = document.getElementById("reerr");
+            phoerr.textContent = "";
+            passerr.textContent = "";
+            emailerr.textContent = "";
+            userr.textContent = "";
+            reerr.textContent = "";
+            if (!pho.match(/^\d{10}$/) || pho === "") {
+                phoerr.textContent = "Invalid phone number";
+                isvalid = false;
+            }
+            if (!pass.match(/^(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{6,12}$/) || pass === "") {
+                passerr.textContent = "Invalid password (6-12 characters, at least one special character)";
+                isvalid = false;
+            }
+            // if(!user.match(/^[a-z][A-Z]+$/) || user == "")
+            // {
+            //     userr.textContent = "The username should alphabets";
+            //     isvalid = false;
+            // }
+            if(!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) || email == "")
+            {
+                emailerr.textContent = "please enter the valid email";
+                isvalid = false;
+            }
+            if(!reg.match(/^23BCA(0[0-9]{3}|1000)$/))
+            {
+                reerr.textContent = "please enter the valid register no...";
+                isvalid = false;
+            }
+            if (isvalid) {
+                document.getElementById("auth-form").action = "saga.php";
+                document.getElementById("auth-form").submit();
+            }
+        }
+        function toggleForm() {
+            window.location.href = "index.php";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View/Modify</title>
+    <link rel="stylesheet" href="course_style.css">
+    <script>
+        function loadRegisteredCourses() {
+            const registeredCourses = JSON.parse(localStorage.getItem("registeredCourses")) || [];
+            const tableBody = document.getElementById("registeredCoursesTable");
+    
+            tableBody.innerHTML = "";
+    
+            registeredCourses.forEach((course, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${course.course}</td>
+                    <td>${course.faculty}</td>
+                    <td>${course.room}</td>
+                    <td>${course.slot}</td>
+                    <td><button style="color: red; padding-top: 10px; padding-bottom: 10px; font-size: 20px;" onclick="unregisterCourse(${index})">Delete</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    
+        function unregisterCourse(index) {
+            let registeredCourses = JSON.parse(localStorage.getItem("registeredCourses")) || [];
+            let seatCounts = JSON.parse(localStorage.getItem("seatCounts")) || {};
+    
+            if (index >= 0 && index < registeredCourses.length) {
+                const deletedCourse = registeredCourses[index];
+                const courseKey = `${deletedCourse.course} - ${deletedCourse.faculty} - ${deletedCourse.room}`;
+    
+                // Increase seat count for the deleted course
+                if (seatCounts[courseKey] !== undefined) {
+                    seatCounts[courseKey] = parseInt(seatCounts[courseKey]) + 1;
+                    localStorage.setItem("seatCounts", JSON.stringify(seatCounts));
+                    console.log(`Seat count updated for ${courseKey}: ${seatCounts[courseKey]}`);
+                } else {
+                    console.error("Course key not found in seatCounts:", courseKey);
+                }
+    
+                
+                registeredCourses.splice(index, 1);
+                localStorage.setItem("registeredCourses", JSON.stringify(registeredCourses));
+    
+                alert("Course unregistered successfully...!");
+                loadRegisteredCourses();
+            }
+        }
+    
+        window.onload = loadRegisteredCourses;
+    </script>
+    
+</head>
+<body>
+    <h2>View/Modify Registered Courses</h2>
+    <table>
+        <tr>
+            <th>S.No</th>
+            <th>Course</th>
+            <th>Faculty</th>
+            <th>Room No</th>
+            <th>Slot</th>
+            <th>Action</th>
+        </tr>
+        <tbody id="registeredCoursesTable"></tbody>
+    </table>
+    <br><br>
+    <center>
+        <button style="color: red; padding-top: 10px; padding-bottom: 10px; font-size: 20px;"  onclick="window.location.href = 'home_2.html'">back</button>
+    </center>
+</body>
+</html>

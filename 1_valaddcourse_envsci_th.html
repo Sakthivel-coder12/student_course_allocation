@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Added Courses</title>
+    <link rel="stylesheet" href="course_style.css">
+    <script>
+        function registerSeat() {
+            let selectedRadio = document.querySelector('input[name="envsci"]:checked');
+            if (!selectedRadio) {
+                alert("Please select a seat before registering.");
+                return;
+            }
+
+            let row = selectedRadio.closest('tr');
+            let courseData = {
+                course: row.cells[1].innerHTML,
+                faculty: row.cells[2].innerText,
+                room: row.cells[3].innerText,
+                slot: row.cells[4].innerText
+            };
+
+            let registeredCourses = JSON.parse(localStorage.getItem("registeredCourses")) || [];
+            registeredCourses.push(courseData);
+            localStorage.setItem("registeredCourses", JSON.stringify(registeredCourses));
+
+            alert("Course registered successfully!");
+          //  window.location.href = "view_modify.html"; // Redirect to View/Modify page
+        }
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        <button class="view-modify-btn" onclick="window.location.href='view.html'">View/Modify</button>
+    </div>
+    
+    <h2>Value Added Courses</h2>
+    <table>
+        <tr id = "ftr">
+            <th>S.No</th>
+            <th>Course</th>
+            <th>Faculty Name</th>
+            <th>Room No</th>
+            <th>Slot</th>
+            <th>Select</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>UCHY101L - Environmental Science<b>(Theory Only)</b> </td>
+            <td>Sreetama Ghosh</td>
+            <td>SJT-203</td>
+            <td>B1</td>
+            <td><input type="radio" name="envsci">70</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>UCHY101L - Environmental Science<b>(Theory Only)</b> </td>
+            <td>Sreetama Ghosh</td>
+            <td>SJT-105</td>
+            <td>B2</td>
+            <td><input type="radio" name="envsci">70</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>UCHY101L - Environmental Science<b>(Theory Only)</b> </td>
+            <td>Thendral</td>
+            <td>SJT-802</td>
+            <td>B1</td>
+            <td><input type="radio" name="envsci">70</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>UCHY101L - Environmental Science<b>(Theory Only)</b> </td>
+            <td>Thendral</td>
+            <td>SJT-415</td>
+            <td>B2</td>
+            <td><input type="radio" name="envsci">70</td>
+        </tr>
+    </table>
+    <br><br>
+    <center>
+        <button class="register-btn" onclick="registerSeat()">Register</button>
+    </center>
+
+    <center>
+        <button onclick="window.history.back()" class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill="#BB271A">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M7 8V5l-7 7 7 7v-3l-4-4 4-4zm6 1V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/>
+            </svg>
+            Back
+        </button>
+    </center>
+</body>
+</html>

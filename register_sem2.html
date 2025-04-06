@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Registration</title>
+    <style>
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Cactus Classical Serif', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(270deg, #c789e5, #c3447d, #c08382, #ac85ef);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: #faf7fb;
+        }
+        .course-btn {
+            background: #8b58ab;
+            padding: 20px;
+            margin: 10px auto;
+            border-radius: 20px;
+            cursor: pointer;
+            text-align: center;
+            width: 300px;
+            color: #faf7fb;
+            font-size: 16px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .course-btn:hover {
+            transform: scale(1.05);
+            background: #c08382;
+        }
+        .center {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .show-btn {
+            background: #d3a8ba;
+            padding: 20px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #0b070d;
+            border: none;
+        }
+        #bac {
+            background: #d3a8ba;
+            padding: 20px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #0b070d;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <button class="show-btn">The Second Semester Course</button>
+    </div>
+    <div class="center">
+        <div class="course-btn" onclick="goToPage('2_disciplinecore.html')">Discipline Core</div>
+        <div class="course-btn" onclick="goToPage('noo_course2.html')">Discipline Elective</div>
+        <div class="course-btn" onclick="goToPage('noo_course2.html')">Projects and Internship</div>
+        <div class="course-btn" onclick="goToPage('noo_course2.html')">Open Elective</div>
+        <div class="course-btn" onclick="goToPage('2_abilityenhancement.html')">Ability Enhancement</div>
+        <div class="course-btn" onclick="goToPage('2_skillenhancement.html')">Skill Enhancement</div>
+        <div class="course-btn" onclick="goToPage('2_valueaddedcourses.html')">Value Added Course</div>
+    </div>
+    <div class = "center"><button id="bac" onclick="go_to_home()">Back</button></div>
+    <script>
+        function goToPage(page) {
+            window.location.href = page;
+        }
+        function go_to_home()
+        {
+            window.location.href = "home_2.html";
+        }
+    </script>
+
+</body>
+</html>

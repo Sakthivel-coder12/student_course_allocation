@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>
+            NOO COURSE
+        </title>
+        <style>
+            .cour
+            {
+                position: relative;
+                top: 60px;
+                color: red;
+                font-weight: 1000;
+                font-size: 35;
+                padding: 60px;
+                margin-left: 30px;
+                margin-right: 30px;
+                border-radius: 10px;
+                background-color: rgb(230, 200, 183);
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            :hover.cour
+            {
+                cursor: pointer;
+                transform: scale(1.1);
+            }
+            .cour div
+            {
+                margin: 0;
+                position: relative;
+                top: 50px;
+                padding: 8px;
+                background-color: red;
+            }
+            .back-btn {
+                margin-top: 15px;
+                padding: 5px;
+                background-color: olive;
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-size: 30px;
+                border-radius: 5vh;
+        }
+        </style>
+        <script>
+            
+            function go_to_sem1()
+            {
+                window.location.href = "register_sem3.html";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="cour">
+            <center>
+                THERE IS NO COURSE IN THIS CATEGORY FOR THIS SEMESTER 
+            </center>
+            <div></div>
+        </div>
+        <br><br><br><br>
+        <center>
+        <button   onclick="go_to_sem1()"  class="back-btn">Back</button>
+        </center>
+    </body>
+</html>
